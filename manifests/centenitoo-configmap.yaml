@@ -1,20 +1,13 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Service
 metadata:
-  name: centenitoo-config
-  labels:
-    app: postgres
-data: 
-  DEV_SECRET_KEY : elephant-database-prod 
-  DEV_DATABASE : frhlebto 
-  DEV_USER : frhlebto 
-  DEV_PASSWORD : gBswDoxM8SNT8fNobBfFSeTu53-dUlst 
-  DEV_HOST : mahmud.db.elephantsql.com
-  DEV_PORT : "5432"
-
-  PROD_SECRET_KEY : elephant-database-prod 
-  PROD_DATABASE : frhlebto 
-  PROD_USER : frhlebto 
-  PROD_PASSWORD : gBswDoxM8SNT8fNobBfFSeTu53-dUlst 
-  PROD_HOST : mahmud.db.elephantsql.com
-  PROD_PORT : "5432"
+  name: YOSOYCENTENITO
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP  
+  ports:
+  - name: "centenitoo"
+    port: 8080
+  selector:
+    app: YOSOYCENTENITO
